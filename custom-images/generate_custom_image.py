@@ -179,14 +179,12 @@ def set_custom_image_label(image_name, version, project_id, parsed=False):
     # version regex already checked in arg parser
     parsed_version = version.split(".")
     filter_arg = "--labels=goog-dataproc-version={}-{}-{}".format(
-        parsed_version[0], parsed_version[1], parsed_version[2])
+        parsed_version[0], parsed_version[1], parsed_version[2].lower())
   else:
     # in this case, the version is already in the format of
     # <major>-<minor>-<subminor>
-    filter_arg = "--labels=goog-dataproc-version={}".format(version)
+    filter_arg = "--labels=goog-dataproc-version={}".format(version.lower())
   
-  #Use a fake version to avoid problems with RC regexp and labels 
-  fake_version="1.3.24-deb9"
   filter_arg = "--labels=goog-dataproc-version={}".format(fake_version)
   command = ["gcloud", "compute", "images", "add-labels",
              image_name, "--project", project_id, filter_arg]
