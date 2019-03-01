@@ -185,6 +185,7 @@ def set_custom_image_label(image_name, version, project_id, parsed=False):
     # <major>-<minor>-<subminor>
     filter_arg = "--labels=goog-dataproc-version={}".format(version.lower())
   
+  filter_arg = "--labels=goog-dataproc-version={}".format("1-3-24-deb9")
   command = ["gcloud", "compute", "images", "add-labels",
              image_name, "--project", project_id, filter_arg]
 
